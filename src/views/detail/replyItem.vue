@@ -20,6 +20,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ReplyItem } from "../../interface/ReplyItem";
 
+@Component
 export default class Item extends Vue {
   @Prop() item?: ReplyItem;
   @Prop() index?: number;

@@ -1,9 +1,9 @@
 <template>
-  <div class="detail" v-if="loaded">
+  <div>
     <app-head :back="true" :title="loaded?detail.title:'加载中'"></app-head>
-    <div v-if="loaded" class="detail">
-      <detail-article :detail="detail" :loaded="loaded"></detail-article>
-      <!-- <reply :replies="detail.replies"></reply> -->
+    <div class="detail" v-if="loaded">
+      <detail-article :detail="detail"></detail-article>
+      <reply :replies="detail.replies"></reply>
     </div>
   </div>
 </template>
@@ -19,8 +19,8 @@ import Reply from "./reply.vue";
 @Component({
   components: {
     AppHead,
-    DetailArticle
-    // Reply
+    DetailArticle,
+    Reply
   }
 })
 export default class Detail extends Vue {

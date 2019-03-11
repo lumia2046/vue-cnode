@@ -14,6 +14,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ReplyItem } from "../../interface/ReplyItem";
 import Item from "./replyItem.vue";
+
 @Component({
   components: {
     Item

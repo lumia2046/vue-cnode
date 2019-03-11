@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-article" v-if="loaded">
+  <div class="detail-article">
     <h4 class="head">
       <img :src="detail.author.avatar_url" class="img" @click="imgClick(detail.author.loginname)">
       <span class="info">
@@ -23,12 +23,9 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { TopicItem } from "../../interface/TopicItem";
 
+@Component
 export default class Article extends Vue {
   @Prop() detail?: TopicItem;
-  @Prop({ default: false }) loaded: boolean = false;
-  beforeCreate(){
-      console.log(this.loaded)
-  }
   imgClick(name: string) {
     this.$router.push(`/user/${name}`);
   }

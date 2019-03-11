@@ -42,7 +42,7 @@ export default class Item extends Vue {
   }
 
   handleClick() {
-    this.$router.push(`/detail/${this.info.id}`)
+    this.$router.push(`/detail/${this.info.id}`);
   }
 }
 </script>
