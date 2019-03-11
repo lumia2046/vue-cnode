@@ -1,17 +1,20 @@
 <template>
   <div class="home">
-    <home-head></home-head>
+    <head-bar></head-bar>
     <router-view></router-view>
+    <foot-bar></foot-bar>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HomeHead from '@/components/Home/HomeHead.vue';
+import FootBar from '@/components/footBar.vue';
+import HeadBar from './headBar.vue';
 
 @Component({
   components: {
-    HomeHead
+    HeadBar,
+    FootBar
   },
 })
 export default class Home extends Vue {

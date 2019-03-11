@@ -17,5 +17,5 @@
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
     "disable-next-line":"trailing-comma"
-  }"
+  }
 }

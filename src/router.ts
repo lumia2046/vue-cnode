@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
-import HomeList from "./components/Home/List.vue";
+import Home from "./views/home/index.vue";
+import HomeContent from "./views/home/content.vue";
+import Detail from "./views/detail/index.vue";
 
 Vue.use(Router);
 
@@ -11,18 +12,30 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: "/index/index"
+      redirect: "/home"
     },
     {
-      path: "/index",
+      path: "/home",
       name: "home",
       component: Home,
       children: [
         {
+          path: "",
+          redirect: "all"
+        },
+        {
           path: ":tabName",
-          component: HomeList
+          component: HomeContent
         }
       ]
+    },
+    {
+      path: "/detail/:id",
+      name: "detail",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("./views/detail/index.vue")
     },
     {
       path: "/about",

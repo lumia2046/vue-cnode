@@ -1,11 +1,10 @@
 <template>
-  <div class="list">
+  <div class="home-head-bar">
     <router-link
       v-for="(item,i) of items"
       :key="i"
-      :to="'/index/'+item.link"
-      class="item"
-      :class="{active:activeLink===item.link}"
+      :to="'/home/'+item.link"
+      :class="['item',{active:activeLink===item.link}]"
     >{{item.title}}</router-link>
   </div>
 </template>
@@ -59,22 +58,25 @@ export default class HomeHead extends Vue {
   }
 
   created() {
-    this.setActiveLink()
+    this.setActiveLink();
   }
 }
 </script>
 
 <style lang="scss">
-.list {
+.home-head-bar {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
   .item {
     display: inline-block;
     width: calc(100% / 6);
     padding: 10px;
-    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    border-bottom: 2px solid transparent;
     text-align: center;
   }
   .active {
-    border-bottom: 3px solid rgb(200, 0, 0);
+    
+    border-color: rgb(200, 0, 0);
   }
 }
 </style>
