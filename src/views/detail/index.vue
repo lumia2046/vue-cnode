@@ -2,10 +2,10 @@
   <div>
     <app-head :back="true" :title="loaded?detail.title:'加载中'"></app-head>
     <div class="detail" v-if="loaded">
-      <div id="test1">111111111111</div>
+      <!-- <div id="test1">111111111111</div>
       <div id="test2">222222222222</div>
       <div :onclick='handleClick1'>3333333333</div>
-      <div :onclick='handleClick2'>4444444444</div>
+      <div :onclick='handleClick2'>4444444444</div> -->
       <detail-article :detail="detail"></detail-article>
       <reply :replies="detail.replies"></reply>
     </div>
@@ -45,20 +45,20 @@ export default class Detail extends Vue {
       });
   }
 
-  mounted() {
-    setTimeout(() => {
-      document.getElementById("test1").onclick = this.handleClick1;
-      document.getElementById("test2").onclick = this.handleClick2;
-    }, 3000);
-  }
+  // mounted() {
+  //   setTimeout(() => {
+  //     document.getElementById("test1").onclick = this.handleClick1;
+  //     document.getElementById("test2").onclick = this.handleClick2;
+  //   }, 3000);
+  // }
 
-  handleClick1 = () => {
-    console.log(this);
-  };
+  // handleClick1 = () => {
+  //   console.log(this);
+  // };
 
-  handleClick2() {
-    console.log(this);
-  }
+  // handleClick2() {
+  //   console.log(this);
+  // }
 }
 </script>
 
