@@ -1,8 +1,8 @@
 <template>
   <div class="login">
-    <input placeholder="请输入Access Token" class="input" [(ngModel)]="token">
-    <button class="button" (click)="submit()">确定</button>
-    <p *ngIf="message">{{message}}</p>
+    <input placeholder="请输入Access Token" class="input" v-model="token">
+    <button class="button" @click="submit()">确定</button>
+    <p v-if="message">{{message}}</p>
   </div>
 </template>
 
@@ -18,31 +18,14 @@ import { TopicItem } from "@/interface/TopicItem";
     AppHead
   }
 })
-export default class Profile extends Vue {
-  userInfo: UserInfo | null = null;
-  items?: TopicItem[];
-  type: number = 0;
+export default class Login extends Vue {
+  token?: string='';
+  message?: string='';
 
-  created() {
-    const name = this.$route.params["name"];
-    axios.get(`https://cnodejs.org/api/v1/user/${name}`).then(response => {
-      const { data } = response;
-      this.userInfo = data["data"];
-      this.items = this.userInfo.recent_replies;
-    });
-  }
-
-  handleClick(type: number) {
-    this.type = type;
-    if (type === 0) {
-      this.items = this.userInfo.recent_replies;
-    } else {
-      this.items = this.userInfo.recent_topics;
-    }
-  }
-
-  goToDetail(id: string) {
-    this.$router.push(`/detail/${id}`);
+  submit() {
+    this.$store.dispatch('getUserInfo',this.token).then(()=>{
+      this.$router.push('/profile');
+    })
   }
 }
 </script>

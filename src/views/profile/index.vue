@@ -1,24 +1,24 @@
 <template>
   <div class="profile">
-    <div *ngIf="!loginService.userInfo" class="not-login">
+    <div v-if="!$store.state.userInfo" class="not-login">
       <p class="not-login-text">您还未登陆，请先登陆！</p>
       <button>
-        <a class="to-login" routerLink="/login">登陆</a>
+        <router-link class="to-login" to="/login">登陆</router-link>
       </button>
     </div>
-    <div *ngIf="loginService.userInfo" class="profile">
+    <div v-if="$store.state.userInfo" class="profile">
       <app-head title="我的">
         <app-logout></app-logout>
       </app-head>
-      <img [src]="loginService.userInfo.avatar_url" class="user-img">
-      <p class="name">{{loginService.userInfo.loginname}}</p>
+      <img :src="$store.state.userInfo.avatar_url" class="user-img">
+      <p class="name">{{$store.state.userInfo.loginname}}</p>
       <!-- <p class='item'>我的消息<span class='item-right'>></span></p> -->
-      <p class="item" (click)="goToUser()">
+      <p class="item" @click="goToUser()">
         我的回复
         <span class="item-right">></span>
       </p>
     </div>
-    <app-foot-bar></app-foot-bar>
+    <foot-bar></foot-bar>
   </div>
 </template>
 
@@ -26,39 +26,22 @@
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 import AppHead from "@/components/head.vue";
-import { UserInfo } from "@/interface/UserInfo";
-import { TopicItem } from "@/interface/TopicItem";
+import FootBar from "@/components/footBar.vue";
+import AppLogout from '../login/logout.vue';
 
 @Component({
   components: {
-    AppHead
+    AppHead,
+    FootBar,
+    AppLogout
   }
 })
 export default class Profile extends Vue {
-  userInfo: UserInfo | null = null;
-  items?: TopicItem[];
-  type: number = 0;
-
   created() {
-    const name = this.$route.params["name"];
-    axios.get(`https://cnodejs.org/api/v1/user/${name}`).then(response => {
-      const { data } = response;
-      this.userInfo = data["data"];
-      this.items = this.userInfo.recent_replies;
-    });
+    console.log(this.$store.state);
   }
-
-  handleClick(type: number) {
-    this.type = type;
-    if (type === 0) {
-      this.items = this.userInfo.recent_replies;
-    } else {
-      this.items = this.userInfo.recent_topics;
-    }
-  }
-
-  goToDetail(id: string) {
-    this.$router.push(`/detail/${id}`);
+  goToUser() {
+    this.$router.push(`/user/${this.$store.state.userInfo.loginname}`);
   }
 }
 </script>

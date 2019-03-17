@@ -2,7 +2,7 @@
   <div class="components-head">
     <span class="back" v-if="back" @click="goBack()"><</span>
     <span class="right">
-      <!-- <ng-content></ng-content> -->
+      <slot></slot>
     </span>
     <span class="title">{{title}}</span>
   </div>

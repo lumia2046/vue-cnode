@@ -11,7 +11,7 @@
       <div class="foot">
         <span class="to_reply" @click="changeShowReply()">回复</span>
       </div>
-      <!-- <app-input *ngIf="showReply" :replyId="item.id"></app-input> -->
+      <app-input v-if="showReply" :replyId="item.id" :getDetail="$props.getDetail"></app-input>
     </div>
   </div>
 </template>
@@ -19,20 +19,24 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ReplyItem } from "../../interface/ReplyItem";
+import AppInput from "./input.vue";
 
-@Component
+@Component({
+  components: {
+    AppInput
+  }
+})
 export default class Item extends Vue {
   @Prop() item?: ReplyItem;
   @Prop() index?: number;
-  showReply?: boolean;
-
-
+  @Prop() getDetail!:Function;
+  showReply: boolean = false;
 
   changeShowReply() {
     this.showReply = !this.showReply;
   }
 
-  imgClick(name:string) {
+  imgClick(name: string) {
     this.$router.push(`/user/${name}`);
   }
 }

@@ -14,8 +14,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import { LinkItem } from "../interface/LinkItem";
 
-@Component({})
-export default class List extends Vue {
+@Component
+export default class FootBar extends Vue {
   activeLink = "/home";
 
   items: LinkItem[] = [

@@ -5,8 +5,15 @@
       <span class="number">{{replies.length}}</span>
       )条回复
     </p>
-    <item v-for="(item,i) of replies" :key="i" :item="item" :index="i"></item>
-    <app-input></app-input>
+    <div v-for="(item,i) of list" :key="i">{{item}}</div>
+    <item
+      v-for="(item,i) of replies"
+      :key="i"
+      :item="item"
+      :index="i"
+      :getDetail="$props.getDetail"
+    ></item>
+    <app-input :getDetail="$props.getDetail"></app-input>
   </div>
 </template>
 
@@ -14,14 +21,21 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ReplyItem } from "../../interface/ReplyItem";
 import Item from "./replyItem.vue";
+import AppInput from "./input.vue";
 
 @Component({
   components: {
-    Item
+    Item,
+    AppInput
   }
 })
 export default class Reply extends Vue {
   @Prop() replies?: ReplyItem[];
+  @Prop() getDetail!: Function;
+  @Prop() list!: any;
+  beforeUpdated() {
+    console.log(this);
+  }
 }
 </script>
 
