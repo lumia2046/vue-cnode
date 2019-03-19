@@ -5,7 +5,6 @@
       <span class="number">{{replies.length}}</span>
       )条回复
     </p>
-    <div v-for="(item,i) of list" :key="i">{{item}}</div>
     <item
       v-for="(item,i) of replies"
       :key="i"
@@ -13,7 +12,7 @@
       :index="i"
       :getDetail="$props.getDetail"
     ></item>
-    <app-input :getDetail="$props.getDetail"></app-input>
+    <app-input :getDetail="$props.getDetail" @getDetailEvent="getDetail"></app-input>
   </div>
 </template>
 
@@ -32,6 +31,7 @@ import AppInput from "./input.vue";
 export default class Reply extends Vue {
   @Prop() replies?: ReplyItem[];
   @Prop() getDetail!: Function;
+  @Prop() getDetailEvent!: Function;
   @Prop() list!: any;
   beforeUpdated() {
     console.log(this);

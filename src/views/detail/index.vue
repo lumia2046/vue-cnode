@@ -6,8 +6,12 @@
       <div id="test2">222222222222</div>
       <div :onclick='handleClick1'>3333333333</div>
       <div :onclick='handleClick2'>4444444444</div>-->
+      <!-- <div>{{JSON.stringify(detail)}}</div> -->
+      <!-- 必须要加上这个，原因未知 -->
+      <div>{{test}}</div>
+
       <detail-article :detail="detail"></detail-article>
-      <reply :replies="detail.replies" :getDetail="getDetail" :list="list.a"></reply>
+      <reply :replies="detail.replies" :getDetail="getDetail" @getDetailEvent="getDetail"></reply>
     </div>
   </div>
 </template>
@@ -31,6 +35,7 @@ export default class Detail extends Vue {
   detail?: TopicItem;
   list: any = { a: [1, 2] };
   loaded: boolean = false;
+  test:any = 1;
 
   beforeCreate() {
     console.log(this.loaded);
@@ -46,6 +51,7 @@ export default class Detail extends Vue {
       .get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
       .then(response => {
         this.detail = response.data.data;
+        this.test = Math.random()
         console.log(this.detail);
         this.loaded = true;
       });

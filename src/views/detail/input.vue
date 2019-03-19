@@ -32,8 +32,10 @@ export default class Input extends Vue {
       content:this.content,
       replyId:this.replyId
     }).then(response => {
+      console.log(response.data.success)
         if (response.data.success) {
-          this.getDetail();
+          // this.getDetail();
+          this.$emit('getDetailEvent')
           this.content = '';
         }
       });
